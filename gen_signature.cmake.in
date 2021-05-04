@@ -1,0 +1,22 @@
+# get these variables from CMakeLists.txt
+set(SRC_DIR "@CMAKE_CURRENT_SOURCE_DIR@")
+set(BIN_DIR "@CMAKE_CURRENT_BINARY_DIR@")
+set(SEED_FILE "@SIGNATURE_SEED_FILE@")
+
+# compute the signature from the seed file
+file(SHA1 ${SEED_FILE} SHA1_SIGNATURE)
+
+# use it to generate the file that will be compiled
+message("sha1 for ${SEED_FILE} is ${SHA1_SIGNATURE}")
+# potentially apply transformations like:
+# string(SUBSTRING ${SHA1_SIGNATURE} 0 8 SHA1_SIGNATURE)
+# message("short signature will be ${SHA1_SIGNATURE}")
+
+# finally write a file that will be compiled with the signature in it
+configure_file(
+	${SRC_DIR}/signature.c.in
+	${BIN_DIR}/signature.c
+	@ONLY
+	)
+
+

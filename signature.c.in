@@ -1,0 +1,5 @@
+#include "signature.h"
+
+#define SHA1_SIGNATURE "@SHA1_SIGNATURE@"
+
+char my_signature[] = SHA1_SIGNATURE;
